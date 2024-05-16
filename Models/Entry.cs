@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace better_list_app_backend_dotnet.Models
 {
     public class Entry
@@ -7,6 +9,7 @@ namespace better_list_app_backend_dotnet.Models
         public string? Url { get; set; }
         public string? Image { get; set; }
         public bool IsDone { get; set; }
+        [JsonIgnore]
         public Category? Category { get; set; }
 
         // Todo: Add SoftDelete property

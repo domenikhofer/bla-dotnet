@@ -5,6 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 // https://supunawa.medium.com/mysql-database-with-net-core-6-and-entity-framework-cc901bde9127
 
+// https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-8.0&tabs=visual-studio-code#initial-migration
+
+// Todo: Seeder
+
 namespace better_list_app_backend_dotnet.Migrations
 {
     /// <inheritdoc />

@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace better_list_app_backend_dotnet.Models;
 
 public class Category
@@ -8,9 +10,9 @@ public class Category
     public string? Emoji { get; set; }
     public CategoryType? CategoryType { get; set; }
     public int? ParentId { get; set; }
-    public virtual Category? Parent { get; set; }
+    [ForeignKey("ParentId")]
     public virtual ICollection<Category>? Children { get; set; }
     // https://stackoverflow.com/a/33417518
-    public ICollection<Entry>? Entries { get; set; }
+    public ICollection<Entry>? Entries { get; }
     // https://learn.microsoft.com/en-us/ef/core/modeling/relationships
 }
