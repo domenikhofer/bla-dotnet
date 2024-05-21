@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using better_list_app_backend_dotnet.Data;
-using better_list_app_backend_dotnet.Models;
+
 
 // dotnet aspnet-codegenerator controller -name CategoryController -async -api -m Category -dc ApplicationDbContext -outDir Controllers
 
@@ -25,23 +19,24 @@ namespace better_list_app_backend_dotnet.Controllers
 
         // GET: api/Category
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
         {
-            return await _context.Categories.Include(c => c.Entries).ToListAsync(); // Todo: only get main categories + only show entries on getOne
+            return await _context.Categories.Include(c => c.Children).Where(c => c.Children != null && c.Children.Count != 0).Select(c => new CategoryDto(c)).ToListAsync(); 
         }
 
         // GET: api/Category/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<CategoryWithEntriesDto>> GetCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+
+            var category = await _context.Categories.Include(c => c.Entries).FirstOrDefaultAsync(c => c.Id == id);
 
             if (category == null)
             {
                 return NotFound();
             }
 
-            return category;
+            return new CategoryWithEntriesDto(category);
         }
 
         // PUT: api/Category/5

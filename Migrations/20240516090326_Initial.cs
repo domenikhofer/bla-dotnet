@@ -7,8 +7,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 // https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-8.0&tabs=visual-studio-code#initial-migration
 
-// Todo: Seeder
-
 namespace better_list_app_backend_dotnet.Migrations
 {
     /// <inheritdoc />

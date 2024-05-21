@@ -20,7 +20,7 @@ namespace better_list_app_backend_dotnet.Models
 
                 // https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/working-with-sql?view=aspnetcore-8.0&tabs=visual-studio#seed-the-database
 
-                // Todo: move seeder data to json file or something prettier
+                // TODO: move seeder data to json file or something prettier
 
                 context.CategoryTypes.AddRange(
                     new CategoryType
@@ -52,7 +52,7 @@ namespace better_list_app_backend_dotnet.Models
                         Name = "Summer",
                         Emoji = "☀️",
                         CategoryType = null,
-                        ParentId = 1, // Todo: find better way to get id
+                        ParentId = 1, // TODO: find better way to get id
                     },
                     new Category
                     {

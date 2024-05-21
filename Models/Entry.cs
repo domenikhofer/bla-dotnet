@@ -12,7 +12,7 @@ namespace better_list_app_backend_dotnet.Models
         [JsonIgnore]
         public Category? Category { get; set; }
 
-        // Todo: Add SoftDelete property
+        // TODO: Add SoftDelete property
 
     }
 }
