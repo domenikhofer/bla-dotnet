@@ -23,15 +23,15 @@ namespace better_list_app_backend_dotnet.Models
                 // TODO: move seeder data to json file or something prettier
 
                 context.CategoryTypes.AddRange(
-                    new CategoryType
+                    new CategoryTypeModel
                     {
                         Name = "Movie/TV Show"
                     },
-                    new CategoryType
+                    new CategoryTypeModel
                     {
                         Name = "Game"
                     },
-                     new CategoryType
+                     new CategoryTypeModel
                      {
                          Name = "Book"
                      }
@@ -40,133 +40,133 @@ namespace better_list_app_backend_dotnet.Models
                 context.SaveChanges();  // Better solution for multiple saves?
 
                 context.Categories.AddRange(
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Activities",
                         Emoji = null,
                         CategoryType = null,
                         ParentId = null,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Summer",
                         Emoji = "☀️",
                         CategoryType = null,
                         ParentId = 1, // TODO: find better way to get id
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Winter",
                         Emoji = "❄️",
                         CategoryType = null,
                         ParentId = 1,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Media",
                         Emoji = null,
                         CategoryType = null,
                         ParentId = null,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Movies",
                         Emoji = "🎬",
                         CategoryType = context.CategoryTypes.Single(ct => ct.Name == "Movie/TV Show"),
                         ParentId = 4,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Series",
                         Emoji = "📺",
                         CategoryType = context.CategoryTypes.Single(ct => ct.Name == "Movie/TV Show"),
                         ParentId = 4,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Games",
                         Emoji = "🎮",
                         CategoryType = context.CategoryTypes.Single(ct => ct.Name == "Game"),
                         ParentId = 4,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Books",
                         Emoji = "📘",
                         CategoryType = context.CategoryTypes.Single(ct => ct.Name == "Book"),
                         ParentId = 4,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Food",
                         Emoji = null,
                         CategoryType = null,
                         ParentId = null,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Restaurants ZH",
                         Emoji = "🍽️",
                         CategoryType = null,
                         ParentId = 9,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Restaurants Elsewhere",
                         Emoji = "🍜",
                         CategoryType = null,
                         ParentId = 9,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Recipes",
                         Emoji = "📄",
                         CategoryType = null,
                         ParentId = 9,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Cooking / Baking Ideas",
                         Emoji = "🥐",
                         CategoryType = null,
                         ParentId = 9,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Projects",
                         Emoji = null,
                         CategoryType = null,
                         ParentId = null,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "General",
                         Emoji = "🪚",
                         CategoryType = null,
                         ParentId = 14,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Programming",
                         Emoji = "💻",
                         CategoryType = null,
                         ParentId = 14,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Other",
                         Emoji = null,
                         CategoryType = null,
                         ParentId = null,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Gift-Ideas",
                         Emoji = "🎁",
                         CategoryType = null,
                         ParentId = 17,
                     },
-                    new Category
+                    new CategoryModel
                     {
                         Name = "Miscellaneous",
                         Emoji = "✨",
@@ -177,7 +177,7 @@ namespace better_list_app_backend_dotnet.Models
                 context.SaveChanges();
 
                 context.Entries.AddRange(
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Klima Plexiglass",
                        Url = null,
@@ -185,7 +185,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Pink Apple",
                        Url = null,
@@ -193,7 +193,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Velo Keller",
                        Url = null,
@@ -201,7 +201,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Raffi Theater Tix",
                        Url = null,
@@ -209,7 +209,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Abdeckplanen",
                        Url = null,
@@ -217,7 +217,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Kleider Org",
                        Url = null,
@@ -225,7 +225,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Wäsche",
                        Url = null,
@@ -233,7 +233,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Creme",
                        Url = null,
@@ -241,7 +241,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Kitchen utensils",
                        Url = null,
@@ -249,7 +249,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Bewerbung Garten",
                        Url = null,
@@ -257,7 +257,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Brille Kratzer",
                        Url = null,
@@ -265,7 +265,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Baum schneiden",
                        Url = null,
@@ -273,7 +273,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Pflanzen züchten",
                        Url = null,
@@ -281,7 +281,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Pflanzen pflanzen",
                        Url = null,
@@ -289,7 +289,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Saisonabo bäder",
                        Url = null,
@@ -297,7 +297,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Ausflüge planen",
                        Url = null,
@@ -305,7 +305,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Pflanzen ricardo",
                        Url = null,
@@ -313,7 +313,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Sachen Verkaufen/Vergeben",
                        Url = null,
@@ -321,7 +321,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Job",
                        Url = null,
@@ -329,7 +329,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Face yoga",
                        Url = null,
@@ -337,7 +337,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Better List App",
                        Url = null,
@@ -345,7 +345,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "DataAnnotation",
                        Url = null,
@@ -353,7 +353,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Hide Klima",
                        Url = null,
@@ -361,7 +361,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Ahv DataAnnotation",
                        Url = null,
@@ -369,7 +369,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Terasse putzen",
                        Url = null,
@@ -377,7 +377,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Sofa putzen",
                        Url = null,
@@ -385,7 +385,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Reduit ausmisten",
                        Url = null,
@@ -393,7 +393,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Keller ausmisten",
                        Url = null,
@@ -401,7 +401,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Umtopfen",
                        Url = null,
@@ -409,7 +409,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Dropbox aufräumen",
                        Url = null,
@@ -417,7 +417,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Disney Paris",
                        Url = null,
@@ -425,7 +425,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Monstera umtopfen + Bambusstab",
                        Url = null,
@@ -433,7 +433,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Produkte aufbrauchen",
                        Url = null,
@@ -441,7 +441,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "ÖV Abo überprüfen",
                        Url = null,
@@ -449,7 +449,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Luftbefeuchter Keller",
                        Url = null,
@@ -457,7 +457,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Pflanzen giessen wöchentlich",
                        Url = null,
@@ -465,7 +465,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Balkon pflanze verschieben",
                        Url = null,
@@ -473,7 +473,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Pflanzen Balkon",
                        Url = null,
@@ -481,7 +481,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Stretching routine",
                        Url = null,
@@ -489,7 +489,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Meditation?",
                        Url = null,
@@ -497,7 +497,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Folie Rückwand Küche",
                        Url = null,
@@ -505,7 +505,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Gampel Tickets",
                        Url = null,
@@ -513,7 +513,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Raiffeisen wechseln",
                        Url = null,
@@ -521,7 +521,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Checkup / Blutbild",
                        Url = null,
@@ -529,7 +529,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Badi Abo ZH",
                        Url = null,
@@ -537,7 +537,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Summer")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "The Croods",
                        Url = "https://www.themoviedb.org/movie/49519",
@@ -545,7 +545,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Movies")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Saving Mr. Banks",
                        Url = "https://www.themoviedb.org/movie/140823",
@@ -553,7 +553,7 @@ namespace better_list_app_backend_dotnet.Models
                        IsDone = false,
                        Category = context.Categories.Single(c => c.Name == "Movies")
                    },
-                   new Entry
+                   new EntryModel
                    {
                        Value = "Hairspray",
                        Url = "https://www.themoviedb.org/movie/2976",

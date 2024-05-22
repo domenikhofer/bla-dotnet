@@ -6,8 +6,8 @@ namespace better_list_app_backend_dotnet.Data
         {
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Entry> Entries { get; set; }
-        public DbSet<CategoryType> CategoryTypes { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<EntryModel> Entries { get; set; }
+        public DbSet<CategoryTypeModel> CategoryTypes { get; set; }
     }
 }
