@@ -13,6 +13,7 @@ namespace better_list_app_backend_dotnet.Models
         public CategoryModel? Category { get; set; }
 
         // TODO: Add SoftDelete property
+        // TODO: Entry Controller
 
     }
 }

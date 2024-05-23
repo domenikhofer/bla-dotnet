@@ -41,14 +41,27 @@ namespace better_list_app_backend_dotnet.Controllers
         // PUT: api/Category/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, CategoryModel category)
+        public async Task<IActionResult> PutCategory(int id, CategoryCreateRequest category)
         {
-            if (id != category.Id)
+            var categoryToUpdate = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+
+            if (categoryToUpdate == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(category).State = EntityState.Modified;
+            var updatedCategory = new CategoryModel
+            {
+                Id = id,
+                Name = category.Name,
+                Emoji = category.Emoji,
+                ParentId = category.ParentId,
+                CategoryType = _context.CategoryTypes.Find(category.CategoryTypeId)
+            }; // TODO: write mapper?
+
+            _context.Entry(categoryToUpdate).CurrentValues.SetValues(updatedCategory);
+
+            _context.Entry(categoryToUpdate).State = EntityState.Modified;
 
             try
             {
