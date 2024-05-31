@@ -6,7 +6,8 @@ public class CategoryModel
     [Required]
     public string? Name { get; set; }
     public string? Emoji { get; set; }
-    public CategoryTypeModel? CategoryType { get; set; }
+    public int? CategoryTypeId { get; set; }
+    public virtual CategoryTypeModel? CategoryType { get; set; }
     public int? ParentId { get; set; }
     [ForeignKey("ParentId")]
     public virtual ICollection<CategoryModel>? Children { get; }

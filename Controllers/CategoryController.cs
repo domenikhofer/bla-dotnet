@@ -1,10 +1,12 @@
 
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 // dotnet aspnet-codegenerator controller -name CategoryController -async -api -m Category -dc ApplicationDbContext -outDir Controllers
 
 namespace better_list_app_backend_dotnet.Controllers
 {
+    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -20,14 +22,21 @@ namespace better_list_app_backend_dotnet.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryResponse>>> GetCategories()
         {
-            return await _context.Categories.Include(c => c.Children).Include(c => c.CategoryType).Where(c => c.Children != null && c.Children.Count != 0).Select(c => new CategoryResponse(c)).ToListAsync();
+            return await _context.Categories.Include(c => c.Children).Include(c => c.CategoryType).Where(c => c.ParentId == null).Select(c => new CategoryResponse(c)).ToListAsync();
+        }
+
+         // GET: api/Category/types
+        [HttpGet("types")]
+        public async Task<ActionResult<IEnumerable<CategoryTypeModel>>> GetCategoryTypes()
+        {
+            return await _context.CategoryTypes.ToListAsync();
         }
 
         // GET: api/Category/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryWithEntriesResponse>> GetCategory(int id)
         {
-
+            // TODO: Include entries only when flag is set in url
             var category = await _context.Categories.Include(c => c.Entries).Include(c => c.CategoryType).FirstOrDefaultAsync(c => c.Id == id);
 
             if (category == null)
@@ -41,7 +50,7 @@ namespace better_list_app_backend_dotnet.Controllers
         // PUT: api/Category/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, CategoryCreateRequest category)
+        public async Task<IActionResult> PutCategory(int id, [FromForm] CategoryCreateRequest category)
         {
             var categoryToUpdate = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
@@ -49,14 +58,14 @@ namespace better_list_app_backend_dotnet.Controllers
             {
                 return NotFound();
             }
-
+           
             var updatedCategory = new CategoryModel
             {
                 Id = id,
                 Name = category.Name,
                 Emoji = category.Emoji,
                 ParentId = category.ParentId,
-                CategoryType = _context.CategoryTypes.Find(category.CategoryTypeId)
+                CategoryTypeId = category.CategoryTypeId
             }; // TODO: write mapper?
 
             _context.Entry(categoryToUpdate).CurrentValues.SetValues(updatedCategory);
@@ -85,7 +94,7 @@ namespace better_list_app_backend_dotnet.Controllers
         // POST: api/Category
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CategoryModel>> PostCategory(CategoryCreateRequest category)
+        public async Task<ActionResult<CategoryModel>> PostCategory([FromForm] CategoryCreateRequest category)
         {
 
             var _category = new CategoryModel

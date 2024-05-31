@@ -7,14 +7,16 @@ public class CategoryResponse
     public int Id { get; set; }
     public string? Name { get; set; }
     public string? Emoji { get; set; }
+    public int? ParentId { get; set; }
     [ForeignKey("ParentId")]
-    public virtual List<CategoryResponse>? Children { get; set; }
+    public virtual List<CategoryResponse>? Subcategories { get; set; }
 
     public CategoryResponse(CategoryModel category)
     {
         Id = category.Id;
         Name = category.Name;
         Emoji = category.Emoji;
-        Children = category.Children?.Select(c => new CategoryResponse(c)).ToList();
+        ParentId = category.ParentId;
+        Subcategories = category.Children?.Select(c => new CategoryResponse(c)).ToList();
     }
 }
