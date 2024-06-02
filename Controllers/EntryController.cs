@@ -30,16 +30,16 @@ namespace better_list_app_backend_dotnet.Controllers
 
         // GET: api/Entry/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EntryModel>> GetEntryModel(int id)
+        public async Task<ActionResult<EntryResponse>> GetEntryModel(int id)
         {
-            var entryModel = await _context.Entries.FindAsync(id);
+            var entryModel = await _context.Entries.Include(e => e.Category).FirstOrDefaultAsync(e => e.Id == id);
 
             if (entryModel == null)
             {
                 return NotFound();
             }
 
-            return entryModel;
+            return new EntryResponse(entryModel);
         }
 
          // GET: api/Entry/5
@@ -117,14 +117,14 @@ namespace better_list_app_backend_dotnet.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntryModel(int id)
         {
-            var entryModel = await _context.Entries.FindAsync(id);
-            if (entryModel == null)
-            {
-                return NotFound();
-            }
+            // var entryModel = await _context.Entries.FindAsync(id);
+            // if (entryModel == null)
+            // {
+            //     return NotFound();
+            // }
 
-            _context.Entries.Remove(entryModel);
-            await _context.SaveChangesAsync();
+            // _context.Entries.Remove(entryModel);
+            // await _context.SaveChangesAsync();
 
             return NoContent();
         }
