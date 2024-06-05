@@ -87,6 +87,28 @@ namespace better_list_app_backend_dotnet.Controllers
             return NoContent();
         }
 
+          // POST: api/Entry
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost("store-media")]
+        public async Task<IActionResult> PostMediaEntryModel([FromBody] EntriesCreateModel entry)
+        {
+            Console.WriteLine(entry.Value);
+
+                _context.Entries.Add(new EntryModel
+                {
+                    Value = entry.Value,
+                    Url = entry.Url,
+                    Image = entry.Image,
+                    IsDone = entry.IsDone,
+                    CategoryId = entry.CategoryId
+                });
+        
+
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
         // POST: api/Entry
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -112,6 +134,8 @@ namespace better_list_app_backend_dotnet.Controllers
 
             return NoContent();
         }
+
+        
 
         // DELETE: api/Entry/5
         [HttpDelete("{id}")]
