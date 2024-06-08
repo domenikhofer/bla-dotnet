@@ -25,7 +25,7 @@ namespace better_list_app_backend_dotnet.Controllers
             return await _context.Categories.Include(c => c.Children).Include(c => c.CategoryType).Where(c => c.ParentId == null).Select(c => new CategoryResponse(c)).ToListAsync();
         }
 
-         // GET: api/Category/types
+        // GET: api/Category/types
         [HttpGet("types")]
         public async Task<ActionResult<IEnumerable<CategoryTypeModel>>> GetCategoryTypes()
         {
@@ -34,17 +34,32 @@ namespace better_list_app_backend_dotnet.Controllers
 
         // GET: api/Category/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryWithEntriesResponse>> GetCategory(int id)
+        public async Task<ActionResult<CategoryWithEntriesResponse>> GetCategory(int id, [FromQuery(Name = "withEntries")] string withEntries)
         {
-            // TODO: Include entries only when flag is set in url
-            var category = await _context.Categories.Include(c => c.Entries).Include(c => c.CategoryType).FirstOrDefaultAsync(c => c.Id == id);
 
-            if (category == null)
+            if (withEntries == "true")
             {
-                return NotFound();
+                var category = await _context.Categories.Include(c => c.Entries).Include(c => c.CategoryType).FirstOrDefaultAsync(c => c.Id == id);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+
+                return new CategoryWithEntriesResponse(category);
+            }
+            else
+            {
+
+                var category = await _context.Categories.Include(c => c.Children).Include(c => c.CategoryType).FirstOrDefaultAsync(c => c.Id == id);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+
+                return new CategoryWithEntriesResponse(category);
             }
 
-            return new CategoryWithEntriesResponse(category);
+
         }
 
         // PUT: api/Category/5
@@ -58,7 +73,7 @@ namespace better_list_app_backend_dotnet.Controllers
             {
                 return NotFound();
             }
-           
+
             var updatedCategory = new CategoryModel
             {
                 Id = id,

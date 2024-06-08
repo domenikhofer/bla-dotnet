@@ -141,14 +141,14 @@ namespace better_list_app_backend_dotnet.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEntryModel(int id)
         {
-            // var entryModel = await _context.Entries.FindAsync(id);
-            // if (entryModel == null)
-            // {
-            //     return NotFound();
-            // }
+            var entryModel = await _context.Entries.FindAsync(id);
+            if (entryModel == null)
+            {
+                return NotFound();
+            }
 
-            // _context.Entries.Remove(entryModel);
-            // await _context.SaveChangesAsync();
+            _context.Entries.Remove(entryModel);
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }

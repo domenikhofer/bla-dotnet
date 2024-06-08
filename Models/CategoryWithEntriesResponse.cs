@@ -11,6 +11,8 @@ public class CategoryWithEntriesResponse
     public int? ParentId { get; set; }
     [ForeignKey("ParentId")]
     public ICollection<EntryModel>? Entries { get; }
+    public virtual List<CategoryResponse>? Subcategories { get; set; }
+
 
     public CategoryWithEntriesResponse(CategoryModel category)
     {
@@ -20,5 +22,7 @@ public class CategoryWithEntriesResponse
         CategoryType = category.CategoryType;
         ParentId = category.ParentId;
         Entries = category.Entries;
+        Subcategories = category.Children?.Select(c => new CategoryResponse(c)).ToList();
+
     }
 }
